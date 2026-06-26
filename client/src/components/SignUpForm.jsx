@@ -97,29 +97,41 @@ const SignUpForm = () => {
 
 			{/* GENDER */}
 			<div>
-				<label className='block text-sm font-medium text-gray-700'>Your Gender</label>
-				<div className='mt-2 flex gap-2'>
+				<label className='block text-sm font-medium text-gray-700'>
+					Your Gender
+				</label>
+
+				<div className='mt-2 flex gap-4'>
 					<div className='flex items-center'>
 						<input
 							id='male'
 							name='gender'
-							type='checkbox'
+							type='radio'
+							value='male'
 							checked={gender === "male"}
-							onChange={() => setGender("male")}
-							className='h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded'
+							onChange={() => {
+								setGender("male");
+								setGenderPreference("male");
+							}}
+							className='h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300'
 						/>
 						<label htmlFor='male' className='ml-2 block text-sm text-gray-900'>
 							Male
 						</label>
 					</div>
+
 					<div className='flex items-center'>
 						<input
 							id='female'
 							name='gender'
-							type='checkbox'
+							type='radio'
+							value='female'
 							checked={gender === "female"}
-							onChange={() => setGender("female")}
-							className='h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded'
+							onChange={() => {
+								setGender("female");
+								setGenderPreference("female");
+							}}
+							className='h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300'
 						/>
 						<label htmlFor='female' className='ml-2 block text-sm text-gray-900'>
 							Female
@@ -130,7 +142,10 @@ const SignUpForm = () => {
 
 			{/* GENDER PREFERENCE */}
 			<div>
-				<label className='block text-sm font-medium text-gray-700'>Prefer Me</label>
+				<label className='block text-sm font-medium text-gray-700'>
+					Prefer Me
+				</label>
+
 				<div className='mt-2 space-y-2'>
 					<div className='flex items-center'>
 						<input
@@ -140,12 +155,14 @@ const SignUpForm = () => {
 							value='male'
 							checked={genderPreference === "male"}
 							onChange={(e) => setGenderPreference(e.target.value)}
-							className='h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300'
+							disabled={gender === "female"}
+							className='h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed'
 						/>
 						<label htmlFor='prefer-male' className='ml-2 block text-sm text-gray-900'>
 							Male
 						</label>
 					</div>
+
 					<div className='flex items-center'>
 						<input
 							id='prefer-female'
@@ -154,24 +171,31 @@ const SignUpForm = () => {
 							value='female'
 							checked={genderPreference === "female"}
 							onChange={(e) => setGenderPreference(e.target.value)}
-							className='h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300'
+							disabled={gender === "male"}
+							className='h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed'
 						/>
 						<label htmlFor='prefer-female' className='ml-2 block text-sm text-gray-900'>
 							Female
 						</label>
 					</div>
+
 					<div className='flex items-center'>
 						<input
 							id='prefer-both'
 							name='gender-preference'
 							type='radio'
 							value='both'
-							checked={genderPreference === "both"}
-							onChange={(e) => setGenderPreference(e.target.value)}
-							className='h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300'
+							disabled
+							className='h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed'
 						/>
-						<label htmlFor='prefer-both' className='ml-2 block text-sm text-gray-900'>
+						<label
+							htmlFor='prefer-both'
+							className='ml-2 flex items-center gap-2 text-sm text-gray-500'
+						>
 							Both
+							<span className='rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-700'>
+								PREMIUM
+							</span>
 						</label>
 					</div>
 				</div>
@@ -193,4 +217,5 @@ const SignUpForm = () => {
 		</form>
 	);
 };
+
 export default SignUpForm;
